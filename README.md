@@ -19,7 +19,11 @@
 | | ex08 | base prompt——软约束 vs 硬约束 + prompt cache | ✅ 已敲 |
 | | ex09 | 权限系统——deny/ask/allow 三档闸门 | ✅ 已敲 |
 | | ex10 | 误删保护——覆盖前备份 + 一键恢复 | ✅ 已敲 |
-| Part 3 · 记住事情 | ex11–ex15 | 会话持久化 / 上下文预算 / 压缩 / 规则文件 / 跨会话记忆 | ⬜ |
+| Part 3 · 记住事情 | ex11 | 会话持久化——history 写盘成 JSONL，增量追加 + 崩溃后丢半行恢复 | ✅ 已敲 |
+| | ex12 | 上下文预算——窗口对照 + 估算/真实双值 + 75% 门槛告警 | ✅ 已敲 |
+| | ex13 | 压缩——让模型总结旧对话，safeSplitIndex 落 user 边界 + 整重写 | ✅ 已敲 |
+| | ex14 | 规则文件——.harnessrules 分层拼进 system prompt | ✅ 已敲 |
+| | ex15 | 跨会话记忆——MEMORY.md 模型自写自读，记错=改文件 | ✅ 已敲 |
 | Part 4 · 长出知识 | ex16–ex18 | 最小 skill 加载器 / 按需触发 / 为何不让 agent 自写 skill | ⬜ |
 | Part 5 · 长出分身 | ex19–ex20 | 第一个 subagent / 并行扇出与上限 | ⬜ |
 
@@ -70,7 +74,12 @@ agent-hard-way/
 ├── ex08/main.go   # base prompt + prompt cache
 ├── ex09/main.go   # 权限系统（deny/ask/allow）
 ├── ex10/main.go   # 误删保护 + 恢复
-├── ex11..ex20/    # 后续章节，逐步补齐
+├── ex11/main.go   # 会话持久化（JSONL 增量写盘 + 崩溃恢复）
+├── ex12/main.go   # 上下文预算（窗口对照 + 估算/真实双值）
+├── ex13/main.go   # 压缩（模型自总结旧对话 + 安全分割 + 整重写）
+├── ex14/main.go   # 规则文件（.harnessrules 分层拼装）
+├── ex15/main.go   # 跨会话记忆（MEMORY.md 模型自写自读）
+├── ex16..ex20/    # 后续章节，逐步补齐
 └── LICENSE        # MIT（练习代码沿用原书 exercises/ 的 MIT 许可）
 ```
 
