@@ -13,7 +13,12 @@
 | | ex02 | 流式输出（SSE） | ✅ 已敲 |
 | | ex03 | 多轮对话——messages 数组 + for 循环 | ✅ 已敲 |
 | | ex04 | provider 抽象——同一份代码接两种协议 | ✅ 已敲 |
-| Part 2 · 长出手脚 | ex05–ex10 | 工具循环 / 注册表 / bash / base prompt / 权限 / 误删保护 | 🚧 进行中 |
+| Part 2 · 长出手脚 | ex05 | 第一个工具——agent loop 完整闭环 | ✅ 已敲 |
+| | ex06 | 工具注册表——声明/执行分离 + read-before-write | ✅ 已敲 |
+| | ex07 | bash 特权工具——超时/截断/固定 cwd | ✅ 已敲 |
+| | ex08 | base prompt——软约束 vs 硬约束 + prompt cache | ✅ 已敲 |
+| | ex09 | 权限系统——deny/ask/allow 三档闸门 | ✅ 已敲 |
+| | ex10 | 误删保护——覆盖前备份 + 一键恢复 | ✅ 已敲 |
 | Part 3 · 记住事情 | ex11–ex15 | 会话持久化 / 上下文预算 / 压缩 / 规则文件 / 跨会话记忆 | ⬜ |
 | Part 4 · 长出知识 | ex16–ex18 | 最小 skill 加载器 / 按需触发 / 为何不让 agent 自写 skill | ⬜ |
 | Part 5 · 长出分身 | ex19–ex20 | 第一个 subagent / 并行扇出与上限 | ⬜ |
@@ -59,7 +64,13 @@ agent-hard-way/
 ├── ex02/main.go   # 流式输出
 ├── ex03/main.go   # 多轮对话
 ├── ex04/main.go   # provider 抽象（OpenAI + Anthropic）
-├── ex05..ex20/    # 后续章节，逐步补齐
+├── ex05/main.go   # 第一个工具 + agent loop 闭环
+├── ex06/main.go   # 工具注册表 + read-before-write
+├── ex07/main.go   # bash 特权工具
+├── ex08/main.go   # base prompt + prompt cache
+├── ex09/main.go   # 权限系统（deny/ask/allow）
+├── ex10/main.go   # 误删保护 + 恢复
+├── ex11..ex20/    # 后续章节，逐步补齐
 └── LICENSE        # MIT（练习代码沿用原书 exercises/ 的 MIT 许可）
 ```
 
