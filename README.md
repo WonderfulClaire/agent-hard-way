@@ -1,8 +1,17 @@
 # Learn Agent the Hard Way — 我的逐章手写练习
 
-> 跟着 [Leihb/learn-agent-the-hard-way](https://github.com/Leihb/learn-agent-the-hard-way)（中文电子书《从 60 行 Go 代码开始，亲手写出一个 agent》），**不复制粘贴、每一章的代码都自己敲**——把 agent = LLM + tool use 这套东西从地基写到生产级 harness。
+[![Verify exercises](https://github.com/WonderfulClaire/agent-hard-way/actions/workflows/verify.yml/badge.svg)](https://github.com/WonderfulClaire/agent-hard-way/actions/workflows/verify.yml)
 
-`agent = LLM + tool use`。模型你改不了，循环只有几十行——一个 agent 和另一个 agent 的全部差别，都在**工具的设计**里。这本书带你从一次裸 HTTP 请求开始，把工具循环、权限、上下文、skill、subagent、MCP、浏览器一个个亲手写出来。仓库里每一章 `exNN/main.go` 都是我**照着书敲出来、并 `go build` 验证过能编译**的实现（非复制粘贴）。
+> 跟着 [Leihb/learn-agent-the-hard-way](https://github.com/Leihb/learn-agent-the-hard-way)（中文电子书《从 60 行 Go 代码开始，亲手写出一个 agent》），**不复制粘贴、每一章的代码都自己敲**——从最小 API 调用开始，逐步理解 agent harness 的核心机制。
+
+`agent = LLM + tool use`。这个仓库不是一个包装好的 agent 产品，而是一条可追踪的学习路径：从裸 HTTP 请求、工具循环，逐步走到权限、上下文压缩和跨会话记忆。当前已完成 `ex01`–`ex15`；每章都是独立 Go module，并由 CI 逐章执行 `go test`、`go vet` 和 `go build`。
+
+## 你能在这里看到什么
+
+- **递进式实现**：每个目录只引入一组新机制，方便对比 agent 能力是怎样长出来的。
+- **安全边界练习**：包括 read-before-write、bash 超时/输出截断、deny/ask/allow 权限和覆盖前备份。
+- **上下文工程**：会话持久化、token 预算、历史压缩、分层规则与跨会话记忆。
+- **可重复验证**：本地一条命令与 GitHub Actions 使用同一套检查。
 
 ## 进度
 
@@ -57,13 +66,25 @@ export MODEL=deepseek-v4-flash
 cd ex04 && go run .
 ```
 
-> 注意：本仓库代码只验证过 `go build` 编译。**真正跑通需要你自己的模型 key**——我没有把任何 key 写进代码或提交。
+> 注意：CI 只做不访问模型的静态验证。**真正跑通需要你自己的模型 key**——仓库不包含任何 key。
+
+## 本地验证
+
+在仓库根目录执行：
+
+```bash
+./scripts/verify.sh
+```
+
+该脚本会发现所有 `ex*/go.mod`，并对每个章节依次执行 `go test ./...`、`go vet ./...` 和 `go build ./...`。GitHub Actions 会在 Go 1.22 和当前稳定版上执行同一脚本。
 
 ## 仓库结构
 
 ```
 agent-hard-way/
 ├── README.md
+├── scripts/verify.sh # 逐章 test + vet + build
+├── .github/workflows/verify.yml
 ├── ex01/main.go   # 一次 API 调用
 ├── ex02/main.go   # 流式输出
 ├── ex03/main.go   # 多轮对话
