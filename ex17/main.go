@@ -53,8 +53,7 @@ func main() {
 		{Name: "research", Description: "search papers and compare evidence", Triggers: []string{"paper", "research", "literature"}},
 		{Name: "coding", Description: "inspect code and run tests", Triggers: []string{"code", "bug", "test"}},
 	}
-	for _, match := range selectSkills(strings.Join([]string{"find", "papers", "about", "agent", "rl"}, " "), skills, 2) {
-		fmt.Printf("%s score=%d
-", match.Skill.Name, match.Score)
+	for _, match := range selectSkills("find papers about agent rl", skills, 2) {
+		fmt.Printf("%s score=%d\n", match.Skill.Name, match.Score)
 	}
 }
