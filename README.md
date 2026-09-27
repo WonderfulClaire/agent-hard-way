@@ -4,7 +4,7 @@
 
 > 跟着 [Leihb/learn-agent-the-hard-way](https://github.com/Leihb/learn-agent-the-hard-way)（中文电子书《从 60 行 Go 代码开始，亲手写出一个 agent》），**不复制粘贴、每一章的代码都自己敲**——从最小 API 调用开始，逐步理解 agent harness 的核心机制。
 
-`agent = LLM + tool use`。这个仓库不是一个包装好的 agent 产品，而是一条可追踪的学习路径：从裸 HTTP 请求、工具循环，逐步走到权限、上下文压缩和跨会话记忆。当前已完成 `ex01`–`ex15`；每章都是独立 Go module，并由 CI 逐章执行 `go test`、`go vet` 和 `go build`。
+`agent = LLM + tool use`。这个仓库不是一个包装好的 agent 产品，而是一条可追踪的学习路径：从裸 HTTP 请求、工具循环，逐步走到权限、上下文压缩和跨会话记忆。当前已完成 `ex01`–`ex20`；每章都是独立 Go module，并由 CI 逐章执行 `go test`、`go vet` 和 `go build`。后五章把 harness 继续扩展到 skill 与 subagent：先做最小加载器，再做按需触发、skill 写保护、任务委派与有限并发 fan-out。
 
 ## 你能在这里看到什么
 
@@ -34,8 +34,11 @@
 | | ex13 | 压缩——让模型总结旧对话，safeSplitIndex 落 user 边界 + 整重写 | ✅ 已敲 |
 | | ex14 | 规则文件——.harnessrules 分层拼进 system prompt | ✅ 已敲 |
 | | ex15 | 跨会话记忆——MEMORY.md 模型自写自读，记错=改文件 | ✅ 已敲 |
-| Part 4 · 长出知识 | ex16–ex18 | 最小 skill 加载器 / 按需触发 / 为何不让 agent 自写 skill | ⬜ |
-| Part 5 · 长出分身 | ex19–ex20 | 第一个 subagent / 并行扇出与上限 | ⬜ |
+| Part 4 · 长出知识 | ex16 | 最小 skill 加载器：读取 `SKILL.md` 元数据与正文 | ✅ 已敲 |
+| | ex17 | 按需触发：基于 trigger / description 的最小技能路由 | ✅ 已敲 |
+| | ex18 | Skill 安全边界：技能目录默认只读，防止 agent 静默改写自己的执行策略 | ✅ 已敲 |
+| Part 5 · 长出分身 | ex19 | 第一个 subagent：显式 task scope + result identity | ✅ 已敲 |
+| | ex20 | 并行 fan-out：并发上限 + context 取消 + 结果归并 | ✅ 已敲 |
 | Bridge · 从执行到学习 | 文档 | Harness → Trajectory → Verifier → SFT / GRPO | ✅ |
 
 ## 怎么跑
@@ -102,7 +105,11 @@ agent-hard-way/
 ├── ex13/main.go   # 压缩（模型自总结旧对话 + 安全分割 + 整重写）
 ├── ex14/main.go   # 规则文件（.harnessrules 分层拼装）
 ├── ex15/main.go   # 跨会话记忆（MEMORY.md 模型自写自读）
-├── ex16..ex20/    # 后续章节，逐步补齐
+├── ex16/main.go   # skill loader
+├── ex17/main.go   # skill trigger / routing
+├── ex18/main.go   # skill write-protection boundary
+├── ex19/main.go   # first scoped subagent
+├── ex20/main.go   # bounded parallel fan-out
 └── LICENSE        # MIT（练习代码沿用原书 exercises/ 的 MIT 许可）
 ```
 
