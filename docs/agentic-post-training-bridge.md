@@ -19,6 +19,10 @@
 | compaction | ex13 | history/state abstraction |
 | project rules | ex14 | harness-specific instruction |
 | cross-session memory | ex15 | persistent external state |
+| skill loader / router | ex16–ex17 | skill distribution / routing policy |
+| skill write boundary | ex18 | policy integrity / action constraint |
+| subagent delegation | ex19 | hierarchical action / task decomposition |
+| bounded fan-out | ex20 | parallel rollout / scheduler constraint |
 
 所以 Agentic Training 不能只写成：
 
@@ -210,3 +214,32 @@ kimi-k3-deep-dive / K3Lab
 1. Agent 怎么执行？
 2. Policy 怎么更新？
 3. 怎么证明训练真的改善了 Agent，而不是改善了 benchmark exploit？
+
+
+## 8. Skill 与 Subagent 为什么也属于 Harness
+
+ex16–ex20 补齐后，Harness 不只是“模型 + tools”。
+
+~~~text
+Harness
+├── Provider
+├── Prompt / Rules
+├── Tool Registry
+├── Context / Memory
+├── Skills
+│   ├── discovery
+│   ├── routing
+│   └── write boundary
+└── Subagents
+    ├── task scope
+    └── concurrency budget
+~~~
+
+进入后训练后，这些都会改变 policy 实际看到的状态和 action space：
+
+- skill 名称、描述与触发条件变化，会形成新的 harness distribution；
+- agent 能否修改 skill，本质上决定了训练时 policy 能不能篡改自己的“行为说明书”；
+- subagent 的并发上限会影响 rollout 成本、轨迹长度与调度行为；
+- 主 agent / subagent 的 task scope 如果不显式保存，失败归因会非常困难。
+
+因此后续做 Agentic Training 时，至少应把 skill_version、selected_skills、subagent_task_id、fanout_limit 一并写进 trajectory metadata。
