@@ -12,6 +12,7 @@
 - **安全边界练习**：包括 read-before-write、bash 超时/输出截断、deny/ask/allow 权限和覆盖前备份。
 - **上下文工程**：会话持久化、token 预算、历史压缩、分层规则与跨会话记忆。
 - **可重复验证**：本地一条命令与 GitHub Actions 使用同一套检查。
+- **从 Harness 接到后训练**：新增 [Agentic Post-Training Bridge](docs/agentic-post-training-bridge.md)，把 provider、tool schema、session、context、memory 映射到 trajectory、verifier、reward 与 held-out harness evaluation。
 
 ## 进度
 
@@ -35,6 +36,7 @@
 | | ex15 | 跨会话记忆——MEMORY.md 模型自写自读，记错=改文件 | ✅ 已敲 |
 | Part 4 · 长出知识 | ex16–ex18 | 最小 skill 加载器 / 按需触发 / 为何不让 agent 自写 skill | ⬜ |
 | Part 5 · 长出分身 | ex19–ex20 | 第一个 subagent / 并行扇出与上限 | ⬜ |
+| Bridge · 从执行到学习 | 文档 | Harness → Trajectory → Verifier → SFT / GRPO | ✅ |
 
 ## 怎么跑
 
