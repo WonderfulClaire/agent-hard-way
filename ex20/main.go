@@ -64,7 +64,6 @@ func main() {
 		return "done: " + task.Prompt, nil
 	})
 	for _, result := range results {
-		fmt.Printf("%s %s
-", result.TaskID, result.Text)
+		fmt.Printf("%s %s\n", result.TaskID, result.Text)
 	}
 }
