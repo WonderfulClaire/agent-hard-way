@@ -45,8 +45,7 @@ func loadSkills(root string) ([]Skill, error) {
 }
 
 func parseSkill(raw string) (name, desc, body string) {
-	lines := strings.Split(raw, "
-")
+	lines := strings.Split(raw, "\n")
 	inFront := false
 	bodyStart := 0
 	for i, line := range lines {
@@ -68,8 +67,7 @@ func parseSkill(raw string) (name, desc, body string) {
 			}
 		}
 	}
-	body = strings.TrimSpace(strings.Join(lines[bodyStart:], "
-"))
+	body = strings.TrimSpace(strings.Join(lines[bodyStart:], "\n"))
 	return
 }
 
@@ -84,7 +82,6 @@ func main() {
 		os.Exit(1)
 	}
 	for _, skill := range skills {
-		fmt.Printf("%s	%s
-", skill.Name, skill.Description)
+		fmt.Printf("%s\t%s\n", skill.Name, skill.Description)
 	}
 }
