@@ -14,6 +14,13 @@
 - **可重复验证**：本地一条命令与 GitHub Actions 使用同一套检查。
 - **从 Harness 接到后训练**：新增 [Agentic Post-Training Bridge](docs/agentic-post-training-bridge.md)，把 provider、tool schema、session、context、memory 映射到 trajectory、verifier、reward 与 held-out harness evaluation。
 
+
+## 独立项目：Verifier-Guided Agentic Training
+
+仓库中新增一个可独立运行的 Python 项目：**[Verifier-Guided Agentic Training for Terminal Agents](projects/verifier-guided-agentic-training/)**。
+
+它把 Harness 进一步接到后训练数据闭环：**Verifier Audit → Hard Trajectory Mining → Replay/Repair → Raw / Filtered / Repaired Data → Paired Held-out Evaluation**。该目录只包含可公开的最小实现与实验协议，不包含私有模型、服务器路径、运行产物或凭证。
+
 ## 进度
 
 | Part | 练习 | 内容 | 状态 |
